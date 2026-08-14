@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { apiUrl, extractItems } from '../config/api';
+import { API_BASE_URL, extractItems } from '../config/api';
 
 function Teams() {
   const [teams, setTeams] = useState([]);
   const [error, setError] = useState(null);
+  const endpoint = '/api/teams/';
 
   useEffect(() => {
-    fetch(apiUrl('teams'))
+    fetch(`${API_BASE_URL}${endpoint}`)
       .then((response) => response.json())
       .then((data) => setTeams(extractItems(data)))
       .catch((err) => setError(err.message));
-  }, []);
+  }, [endpoint]);
 
   return (
     <div className="container py-4">

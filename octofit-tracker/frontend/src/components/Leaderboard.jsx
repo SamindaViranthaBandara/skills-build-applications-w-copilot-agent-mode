@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { apiUrl, extractItems } from '../config/api';
+import { API_BASE_URL, extractItems } from '../config/api';
 
 function Leaderboard() {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
+  const endpoint = '/api/leaderboard/';
 
   useEffect(() => {
-    fetch(apiUrl('leaderboard'))
+    fetch(`${API_BASE_URL}${endpoint}`)
       .then((response) => response.json())
       .then((data) => setEntries(extractItems(data)))
       .catch((err) => setError(err.message));
-  }, []);
+  }, [endpoint]);
 
   return (
     <div className="container py-4">

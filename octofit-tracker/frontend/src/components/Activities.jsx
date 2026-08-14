@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { apiUrl, extractItems } from '../config/api';
+import { API_BASE_URL, extractItems } from '../config/api';
 
 function Activities() {
   const [activities, setActivities] = useState([]);
   const [error, setError] = useState(null);
+  const endpoint = '/api/activities/';
 
   useEffect(() => {
-    fetch(apiUrl('activities'))
+    fetch(`${API_BASE_URL}${endpoint}`)
       .then((response) => response.json())
       .then((data) => setActivities(extractItems(data)))
       .catch((err) => setError(err.message));
-  }, []);
+  }, [endpoint]);
 
   return (
     <div className="container py-4">
